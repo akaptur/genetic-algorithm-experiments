@@ -22,15 +22,9 @@ class Individual(object):
     def get_fitness(self, solution):
         if self._fitness == 0:
             pairs = zip(self.genes, solution)
-            fitness = 0
-            for gene, sol in pairs:
-                if gene == sol:
-                    fitness += 1
-
-            self._fitness = fitness
+            self._fitness = sum(1 for gene, sol in pairs if gene == sol)
 
         return self._fitness
-    
     
     def __str__(self):
         return self.genes.bin
