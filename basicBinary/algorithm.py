@@ -9,7 +9,10 @@ class Algorithm(object):
         self.mutation_rate = 0.015
         self.tournament_size = 5
         self.elitism = True
-        self.use_random_crossover = use_random_crossover
+        if use_random_crossover:
+            self.crossover_fn = self.crossover_random
+        else:
+            self.crossover_fn = self.crossover_pt
     
     def evolvePopulation(self, population, solution):
         population_size = len(population.individuals)
@@ -26,10 +29,7 @@ class Algorithm(object):
             individual_1 = self.tournament_selection(population, solution)
             individual_2 = self.tournament_selection(population, solution)
             
-            if self.use_random_crossover:
-                new_individual = self.crossover_random(individual_1, individual_2)
-            else:
-                new_individual = self.crossover_pt(individual_1, individual_2)
+            new_individual = self.crossover_fn(individual_1, individual_2)
             
             new_population.individuals.append(new_individual)
         
