@@ -11,20 +11,20 @@ class Algorithm(object):
         self.elitism = True
         self.use_random_crossover = use_random_crossover
     
-    def evolvePopulation(self, population):
+    def evolvePopulation(self, population, solution):
         population_size = len(population.individuals)
         new_population = Population(population_size, initialize=False)
         
         if self.elitism:
-            new_population.individuals.append(population.get_fittest())
+            new_population.individuals.append(population.get_fittest(solution))
         
         elitism_offset = 0
         if self.elitism:
             elitism_offset = 1
         
         for i in range(elitism_offset, population_size):
-            individual_1 = self.tournament_selection(population)
-            individual_2 = self.tournament_selection(population)
+            individual_1 = self.tournament_selection(population, solution)
+            individual_2 = self.tournament_selection(population, solution)
             
             if self.use_random_crossover:
                 new_individual = self.crossover_random(individual_1, individual_2)
@@ -39,7 +39,7 @@ class Algorithm(object):
         return new_population
 
 
-    def tournament_selection(self, population):
+    def tournament_selection(self, population, solution):
         population_size = len(population.individuals)
         tournament = Population(self.tournament_size, False)
         
@@ -47,7 +47,7 @@ class Algorithm(object):
             randomId = int(random() * population_size)
             tournament.individuals.append(population.individuals[randomId])
         
-        return tournament.get_fittest()
+        return tournament.get_fittest(solution)
 
 
     def crossover_pt(self, individual_1, individual_2):

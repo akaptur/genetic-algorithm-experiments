@@ -19,9 +19,15 @@ class Individual(object):
             self.genes.bin += str(gene)
         
     
-    def get_fitness(self):
+    def get_fitness(self, solution):
         if self._fitness == 0:
-            self._fitness = fitness.get_fitness(self)
+            fitness = 0
+            for i in range(0, len(self.genes)):
+                if self.genes[i] == solution[i]:
+                    fitness += 1
+
+            self._fitness = fitness
+
         return self._fitness
     
     

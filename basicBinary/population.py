@@ -11,11 +11,11 @@ class Population(object):
                 self.individuals.append(individual)
     
     
-    def get_fittest(self):
+    def get_fittest(self, solution):
         fittest = self.individuals[0]
         
         for i in range(0, len(self.individuals)):
-            if fittest.get_fitness() <= self.individuals[i].get_fitness():
+            if fittest.get_fitness(solution) <= self.individuals[i].get_fitness(solution):
                 fittest = self.individuals[i]
         
         return fittest
