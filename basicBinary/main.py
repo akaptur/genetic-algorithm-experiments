@@ -32,7 +32,8 @@ def parse_args():
     
 def main():
     solution, random = parse_args()
-    BinaryGeneticAlgorithm(solution, use_random_crossover=random)
-    
+    bga = BinaryGeneticAlgorithm(solution, use_random_crossover=random)
+    bga.go()
+
 if __name__ == '__main__':
     main()

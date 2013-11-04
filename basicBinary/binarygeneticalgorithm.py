@@ -7,18 +7,20 @@ import fitness
 
 class BinaryGeneticAlgorithm(object):
     def __init__(self, sol, use_random_crossover=True):
-        max_fitness = len(sol)
-        generation_count = 0
-        solution = BitArray(bin=sol)
-        population = Population(50, initialize=True)
-        
-        while population.get_fittest(solution).get_fitness(solution) < max_fitness:
-            print "Generation: %d" % (generation_count, )
-            print "Fittest Scores: %d" % (population.get_fittest(solution).get_fitness(solution),)
-            print "Fittest: %s\n" % (population.get_fittest(solution).genes.bin,)
-            generation_count += 1
-            population = Algorithm(use_random_crossover).evolvePopulation(population, solution)
+        self.max_fitness = len(sol)
+        self.generation_count = 0
+        self.solution = BitArray(bin=sol)
+        self.population = Population(50, initialize=True)
+        self.use_random_crossover = use_random_crossover
+
+    def go(self):
+        while self.population.get_fittest(self.solution).get_fitness(self.solution) < self.max_fitness:
+            print "Generation: %d" % (self.generation_count, )
+            print "Fittest Scores: %d" % (self.population.get_fittest(self.solution).get_fitness(self.solution),)
+            print "Fittest: %s\n" % (self.population.get_fittest(self.solution).genes.bin,)
+            self.generation_count += 1
+            self.population = Algorithm(self.use_random_crossover).evolvePopulation(self.population, self.solution)
         
         msg = "===== SOLUTION FOUND! =====\nGENERATION: %d\nGENES: %s\n"
-        print msg % (generation_count, population.get_fittest(solution).genes.bin)
+        print msg % (self.generation_count, self.population.get_fittest(self.solution).genes.bin)
     
