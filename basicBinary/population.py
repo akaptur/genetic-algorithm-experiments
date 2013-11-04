@@ -12,10 +12,4 @@ class Population(object):
     
     
     def get_fittest(self, solution):
-        fittest = self.individuals[0]
-        
-        for i in range(0, len(self.individuals)):
-            if fittest.get_fitness(solution) <= self.individuals[i].get_fitness(solution):
-                fittest = self.individuals[i]
-        
-        return fittest
+        return max(self.individuals, key=lambda i: i.get_fitness(solution))
