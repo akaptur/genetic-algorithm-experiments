@@ -21,9 +21,10 @@ class Individual(object):
     
     def get_fitness(self, solution):
         if self._fitness == 0:
+            pairs = zip(self.genes, solution)
             fitness = 0
-            for i in range(0, len(self.genes)):
-                if self.genes[i] == solution[i]:
+            for gene, sol in pairs:
+                if gene == sol:
                     fitness += 1
 
             self._fitness = fitness
