@@ -20,7 +20,7 @@ class Algorithm(object):
         
         elitism_offset = 0
         if self.elitism:
-            elitism_offset = 1
+            elitism_offset = len(new_population.individuals)
         
         for i in range(elitism_offset, population_size):
             individual_1 = self.tournament_selection(population, solution)
