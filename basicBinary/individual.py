@@ -12,12 +12,8 @@ class Individual(object):
             self.genes.bin += str('0')
         
     def generate_individual(self):
-        self.genes = BitArray()
-        
-        for i in range(0, self._default_gene_length):
-            gene = int(round(random()))
-            self.genes.bin += str(gene)
-        
+        genes = [int(round(random())) for i in range(self._default_gene_length)]
+        self.genes = BitArray(genes)
     
     def get_fitness(self, solution):
         if self._fitness == 0:
