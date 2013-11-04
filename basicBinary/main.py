@@ -26,7 +26,7 @@ def parse_args():
     
     pattern = r'[^\.0-1]'
     if re.search(pattern, solution):
-        raise Exception('solution contains invalid character %d' % (len(solution),))
+        raise Exception('solution contains invalid character')
         
     return solution, random
     
